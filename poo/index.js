@@ -29,22 +29,23 @@ class Encuesta {
   };
 
   ejecutar() {
+    console.log("inicio");
+    confirm("Desea iniciar la votacion?");
     let seguirVotando = true;
     while (seguirVotando) {
       this.preguntas.forEach((pregunta) => this.votar(pregunta));
       seguirVotando = confirm("¿Desea seguir votando?");
+      this.preguntas.forEach((pregunta) => pregunta.mostrarVotacion());
     };
   };
 
   votar(pregunta) {
     const respuesta = prompt(`Pregunta: ${pregunta.textoPregunta}\nSeleccione una opción (${pregunta.opciones.join(", ")}):`);
     if (respuesta !== null) {
-      pregunta.recibirRespuesta(respuesta.trim(), this);
-
-      console.log("Resultados finales de la encuesta:");
-      this.preguntas.forEach((pregunta) => pregunta.mostrarVotacion());
+      pregunta.recibirRespuesta(respuesta.trim(), this)
     } else {
       console.log("Votación cancelada");
+      alert ("Votación cancelada");
     };
   };
 };
